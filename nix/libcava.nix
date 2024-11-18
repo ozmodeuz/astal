@@ -20,7 +20,7 @@
 }:
 
 let
-  patched-autoconf-archive = pkgs.autoconf-archive.override {
+  patched-autoconf-archive = autoconf-archive.override {
     patches = [
       (fetchurl {
         url = "https://raw.githubusercontent.com/NixOS/nixpkgs/f4acddd86c8d57f3ec06e93eb957f73c0bdc0e60/pkgs/by-name/au/autoconf-archive/0001-ax_check_gl.m4-properly-quote-m4_fatal.patch";
