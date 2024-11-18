@@ -18,26 +18,27 @@
   meson,
   ninja,
 }:
-
-let
-  patched-autoconf-archive = autoconf-archive.override {
-    patches = [
-      (fetchurl {
-        url = "https://raw.githubusercontent.com/NixOS/nixpkgs/f4acddd86c8d57f3ec06e93eb957f73c0bdc0e60/pkgs/by-name/au/autoconf-archive/0001-ax_check_gl.m4-properly-quote-m4_fatal.patch";
-        hash = "sha256-kOMEnw3vZeEx+/OMdJ95rc5mdgIx5/1ftADk3q8stbQ=";
-      })
-      (fetchurl {
-        url = "https://raw.githubusercontent.com/NixOS/nixpkgs/f4acddd86c8d57f3ec06e93eb957f73c0bdc0e60/pkgs/by-name/au/autoconf-archive/0002-ax_check_glx.m4-properly-quote-m4_fatal.patch";
-        hash = "sha256-UvAGFwyBgZW2n3U9IaXHnSygCq578BftBUA/PWkZQpw=";
-      })
-      (fetchurl {
-        url = "https://github.com/NixOS/nixpkgs/blob/f4acddd86c8d57f3ec06e93eb957f73c0bdc0e60/pkgs/by-name/au/autoconf-archive/0003-ax_switch_flags.m4-properly-quote-m4_fatal.patch";
-        hash = "sha256-Jl7d3vqb90WGMIQu162OPRA6SqDQgR6hPwgAmBJGXp4=";
-      })
-    ];
-  }
-
-in {
+{
+nixpkgs.overlays = [
+  (final: prev: {
+    autoconf-archive = prev.autoconf-archive.override {
+      patches = [
+        (fetchurl {
+          url = "https://raw.githubusercontent.com/NixOS/nixpkgs/f4acddd86c8d57f3ec06e93eb957f73c0bdc0e60/pkgs/by-name/au/autoconf-archive/0001-ax_check_gl.m4-properly-quote-m4_fatal.patch";
+          hash = "sha256-kOMEnw3vZeEx+/OMdJ95rc5mdgIx5/1ftADk3q8stbQ=";
+        })
+        (fetchurl {
+          url = "https://raw.githubusercontent.com/NixOS/nixpkgs/f4acddd86c8d57f3ec06e93eb957f73c0bdc0e60/pkgs/by-name/au/autoconf-archive/0002-ax_check_glx.m4-properly-quote-m4_fatal.patch";
+          hash = "sha256-UvAGFwyBgZW2n3U9IaXHnSygCq578BftBUA/PWkZQpw=";
+        })
+        (fetchurl {
+          url = "https://github.com/NixOS/nixpkgs/blob/f4acddd86c8d57f3ec06e93eb957f73c0bdc0e60/pkgs/by-name/au/autoconf-archive/0003-ax_switch_flags.m4-properly-quote-m4_fatal.patch";
+          hash = "sha256-Jl7d3vqb90WGMIQu162OPRA6SqDQgR6hPwgAmBJGXp4=";
+        })
+      ];
+    };
+  })
+];
 
 stdenv.mkDerivation rec {
   pname = "cava";
