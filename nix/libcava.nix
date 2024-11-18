@@ -2,7 +2,6 @@
   stdenv,
   fetchFromGitHub,
   autoreconfHook,
-  autoconf-archive,
   alsa-lib,
   fftw,
   iniparser,
