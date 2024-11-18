@@ -70,7 +70,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     autoreconfHook
-    patched-autoconf-archive
+    autoconf-archive
     pkgconf
     meson
     ninja
